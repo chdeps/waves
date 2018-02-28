@@ -1,6 +1,7 @@
 {
   "generator-rn-toolbox": {
     "lint": true,
-    "base": true
+    "base": true,
+    "fastlane": true
   }
 }
