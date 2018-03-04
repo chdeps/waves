@@ -10,7 +10,7 @@ export default {
     },
     default: {
       fontSize: 16,
-    }
+    },
   },
   colors: {
     oceanBlue: '#05A5D1',

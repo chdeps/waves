@@ -7,7 +7,7 @@ import {
 } from 'react-navigation-redux-helpers';
 
 const initialNavState = AppNavigator.router.getStateForAction(
-  AppNavigator.router.getActionForPathAndParams('home')
+  AppNavigator.router.getActionForPathAndParams('login')
 );
 
 export const navReducer = (state = initialNavState, action) => {
@@ -17,9 +17,6 @@ export const navReducer = (state = initialNavState, action) => {
   return nextState || state;
 };
 
-export const navMiddleware = createReactNavigationReduxMiddleware(
-  'root',
-  state => state.nav
-);
+export const navMiddleware = createReactNavigationReduxMiddleware('root', state => state.nav);
 
 export const navListener = createReduxBoundAddListener('root');

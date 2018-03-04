@@ -7,15 +7,14 @@ const detoxConfig = packageFile.detox;
 jest.setTimeout(120000);
 
 beforeAll(async () => {
-    await detox.init(detoxConfig, { launchApp: false });
-    await device.launchApp();
+  await detox.init(detoxConfig, { launchApp: false });
+  await device.launchApp();
 });
 
 afterAll(async () => {
-    await detox.cleanup();
+  await detox.cleanup();
 });
 
 beforeEach(async () => {
-    await device.reloadReactNative();
+  await device.reloadReactNative();
 });
-

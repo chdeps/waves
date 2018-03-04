@@ -9,8 +9,11 @@ import * as Pages from 'waves/src/pages';
 import { navListener } from 'waves/src/modules/Nav/module';
 
 export const AppNavigator = StackNavigator({
-  home: {
-    screen: Pages.Home,
+  login: {
+    screen: Pages.Login,
+    navigationOptions: {
+      header: null,
+    },
   },
 });
 

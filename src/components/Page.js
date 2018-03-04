@@ -2,7 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import { View, StyleSheet } from 'react-native';
-import theme from 'waves/src/theme';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   page: {
@@ -14,18 +14,21 @@ const styles = StyleSheet.create({
 
 export default (props: PropsType) => (
   <View
-    style={[styles.page, {
-      paddingTop: props.noNavBar ? 0 : theme.grid.x2,
-      paddingHorizontal: props.noMargin ? 0 : theme.grid.x3,
-      backgroundColor: props.backgroundColor,
-    }]}
+    style={[
+      styles.page,
+      {
+        paddingTop: props.noNavBar ? 0 : theme.grid.x2,
+        paddingHorizontal: props.noMargin ? 0 : theme.grid.x3,
+        backgroundColor: props.backgroundColor,
+      },
+    ]}
   >
     {props.children}
   </View>
 );
 
 type PropsType = {
-  children: React$Element<*> | React$Element<*>[],
+  children: React$Element<*> | React$Element<*>[],
   noMargin: boolean,
   noNavBar: boolean,
   backgroundColor: string,
