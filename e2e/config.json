@@ -1,0 +1,4 @@
+{
+  "setupTestFrameworkScriptFile" : "./init.js",
+  "testMatch": ["**/__tests__/**/*.js?(x)", "**/?(*.)(e2e).js?(x)"]
+}

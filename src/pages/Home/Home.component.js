@@ -17,7 +17,7 @@ export default class Home extends Component {
     return (
       <Page>
         <View style={styles.container}>
-          <Text style={styles.welcome}>
+          <Text style={styles.welcome} testID="title">
             Welcome to React Native!
           </Text>
           <Text style={styles.instructions}>
