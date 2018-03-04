@@ -5,7 +5,7 @@ const gridSize = 8;
 export default {
   fonts: {
     header: {
-      fontSize: 20,
+      fontSize: 30,
       fontWeight: 'bold',
     },
     default: {
