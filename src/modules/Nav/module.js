@@ -7,7 +7,7 @@ import {
 } from 'react-navigation-redux-helpers';
 
 const initialNavState = AppNavigator.router.getStateForAction(
-  AppNavigator.router.getActionForPathAndParams('login')
+  AppNavigator.router.getActionForPathAndParams('welcome')
 );
 
 export const navReducer = (state = initialNavState, action) => {

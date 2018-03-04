@@ -15,6 +15,12 @@ export const AppNavigator = StackNavigator({
       header: null,
     },
   },
+  welcome: {
+    screen: Pages.Welcome,
+    navigationOptions: {
+      header: null,
+    },
+  },
 });
 
 class App extends React.Component {

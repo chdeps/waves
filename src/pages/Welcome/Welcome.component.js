@@ -1,38 +1,29 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import {
-  StyleSheet,
-  Text,
-  KeyboardAvoidingView,
-  View,
-  Image,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { Page } from '../../components';
 import theme from '../../theme';
 import Wave from '../../../assets/images/wave.png';
 
-export default class Login extends PureComponent<PropsType> {
+export default class Welcome extends PureComponent<PropsType> {
   styles = getStyles();
   render() {
     const styles = this.styles;
     return (
       <Page>
-        <KeyboardAvoidingView style={styles.container} behavior="position">
+        <View style={styles.container} behavior="position">
           <Text style={styles.title} testID="title">
             Wind & Waves
           </Text>
           <Image source={Wave} style={styles.image} />
-          <View style={styles.innerContainer}>
-            <TextInput placeholder="Username" style={styles.input} />
-            <TextInput placeholder="Password" secureTextEntry style={styles.input} />
-            <TouchableOpacity style={styles.button}>
-              <Text>Login</Text>
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('login')}
+          >
+            <Text>Get started</Text>
+          </TouchableOpacity>
+        </View>
       </Page>
     );
   }
@@ -49,22 +40,11 @@ const getStyles = () =>
       justifyContent: 'space-around',
       alignItems: 'center',
     },
-    innerContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
     title: {
       ...theme.fonts.header,
       color: theme.colors.oceanBlue,
       textAlign: 'center',
       margin: theme.grid.x4,
-    },
-    input: {
-      margin: 10,
-      padding: 10,
-      backgroundColor: 'white',
-      width: 150,
     },
     button: {
       backgroundColor: theme.colors.oceanBlue,
