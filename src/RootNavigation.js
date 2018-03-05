@@ -1,9 +1,11 @@
 // @flow
 
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-
-import { StackNavigator, addNavigationHelpers } from 'react-navigation';
+import firebase from 'react-native-firebase';
+import { TouchableOpacity, Image } from 'react-native';
+import Door from '../assets/images/door.png';
+import { StackNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation';
 
 import * as Pages from 'waves/src/pages';
 import { navListener } from 'waves/src/modules/Nav/module';
@@ -24,13 +26,32 @@ export const AppNavigator = StackNavigator(
     },
     home: {
       screen: Pages.Home,
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         title: 'Wind & Waves',
-      },
+        headerLeft: (
+          <TouchableOpacity
+            onPress={() => {
+              firebase
+                .auth()
+                .signOut()
+                .then(() =>
+                  navigation.dispatch(
+                    NavigationActions.reset({
+                      index: 0,
+                      actions: [NavigationActions.navigate({ routeName: 'welcome' })],
+                    })
+                  )
+                );
+            }}
+          >
+            <Image source={Door} style={{ marginLeft: 10, height: 30, width: 30 }} />
+          </TouchableOpacity>
+        ),
+      }),
     },
   },
   {
-    initialRouteName: 'home',
+    initialRouteName: 'welcome',
   }
 );
 

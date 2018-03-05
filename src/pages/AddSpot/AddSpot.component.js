@@ -14,19 +14,47 @@ import { Page } from '../../components';
 
 export default class AddSpot extends PureComponent<PropsType> {
   styles = getStyles();
+  state = {
+    name: '',
+    style: '',
+  };
   render() {
     const styles = this.styles;
+    const { spots } = this.props.navigation.state.params;
     return (
       <Page>
         <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.back}>
           <Text>Back</Text>
         </TouchableOpacity>
         <KeyboardAvoidingView style={styles.container} behavior={'padding'}>
+          <Text style={this.styles.title}>NEW SPOT</Text>
           <View>
-            <TextInput placeholder="Name" style={styles.input} />
-            <TextInput placeholder="Style" style={styles.input} />
+            <TextInput
+              placeholder="Name"
+              style={styles.input}
+              value={this.state.name}
+              onChangeText={name => this.setState({ name })}
+            />
+            <TextInput
+              placeholder="Style"
+              style={styles.input}
+              value={this.state.style}
+              onChangeText={style => this.setState({ style })}
+            />
           </View>
-          <TouchableOpacity onPress={() => {}} style={styles.confirm}>
+          <TouchableOpacity
+            onPress={() => {
+              const { name, style } = this.state;
+              if (name && style) {
+                spots.add({
+                  name,
+                  style,
+                });
+                this.props.navigation.goBack();
+              }
+            }}
+            style={styles.confirm}
+          >
             <Text>Confirm</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
@@ -41,6 +69,10 @@ type PropsType = {
 
 const getStyles = () =>
   StyleSheet.create({
+    title: {
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
     container: {
       flex: 1,
       justifyContent: 'space-around',

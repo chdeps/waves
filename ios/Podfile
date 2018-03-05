@@ -8,5 +8,6 @@ target 'waves' do
   # Required by RNFirebase
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
 
 end

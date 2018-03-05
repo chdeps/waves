@@ -63,7 +63,10 @@ export default class Home extends PureComponent<PropsType> {
           {item.name}
         </Text>
         <Text style={this.styles.itemSubText}>{item.style}</Text>
-        <TouchableOpacity style={this.styles.binContainer}>
+        <TouchableOpacity
+          style={this.styles.binContainer}
+          onPress={() => this.spots.doc(item.id).delete()}
+        >
           <Image source={Bin} style={this.styles.bin} />
         </TouchableOpacity>
       </View>
@@ -88,7 +91,7 @@ export default class Home extends PureComponent<PropsType> {
         </ScrollView>
         <TouchableOpacity
           style={styles.back}
-          onPress={() => this.props.navigation.navigate('addSpot')}
+          onPress={() => this.props.navigation.navigate('addSpot', { spots: this.spots })}
         >
           <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>

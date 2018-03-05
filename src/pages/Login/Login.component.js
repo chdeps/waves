@@ -1,6 +1,8 @@
 // @flow
 
 import React, { PureComponent } from 'react';
+import firebase from 'react-native-firebase';
+import { NavigationActions } from 'react-navigation';
 import {
   StyleSheet,
   Text,
@@ -16,6 +18,24 @@ import Wave from '../../../assets/images/wave.png';
 
 export default class Login extends PureComponent<PropsType> {
   styles = getStyles();
+  state = {
+    username: '',
+    password: '',
+  };
+  _login = () => {
+    const { username, password } = this.state;
+    firebase
+      .auth()
+      .signInAndRetrieveDataWithEmailAndPassword(username, password)
+      .then(() =>
+        this.props.navigation.dispatch(
+          NavigationActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'home' })],
+          })
+        )
+      );
+  };
   render() {
     const styles = this.styles;
     return (
@@ -26,9 +46,20 @@ export default class Login extends PureComponent<PropsType> {
           </Text>
           <Image source={Wave} style={styles.image} />
           <View style={styles.innerContainer}>
-            <TextInput placeholder="Username" style={styles.input} />
-            <TextInput placeholder="Password" secureTextEntry style={styles.input} />
-            <TouchableOpacity style={styles.back}>
+            <TextInput
+              placeholder="Username"
+              style={styles.input}
+              value={this.state.username}
+              onChangeText={username => this.setState({ username })}
+            />
+            <TextInput
+              placeholder="Password"
+              secureTextEntry
+              style={styles.input}
+              value={this.state.password}
+              onChangeText={password => this.setState({ password })}
+            />
+            <TouchableOpacity style={styles.back} onPress={this._login}>
               <Text>Login</Text>
             </TouchableOpacity>
           </View>
