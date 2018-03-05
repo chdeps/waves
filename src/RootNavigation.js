@@ -8,25 +8,51 @@ import { StackNavigator, addNavigationHelpers } from 'react-navigation';
 import * as Pages from 'waves/src/pages';
 import { navListener } from 'waves/src/modules/Nav/module';
 
-export const AppNavigator = StackNavigator({
-  login: {
-    screen: Pages.Login,
-    navigationOptions: {
-      header: null,
+export const AppNavigator = StackNavigator(
+  {
+    login: {
+      screen: Pages.Login,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    welcome: {
+      screen: Pages.Welcome,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    home: {
+      screen: Pages.Home,
+      navigationOptions: {
+        title: 'Your spots',
+      },
     },
   },
-  welcome: {
-    screen: Pages.Welcome,
-    navigationOptions: {
-      header: null,
+  {
+    initialRouteName: 'home',
+  }
+);
+
+export const RootNavigator = StackNavigator(
+  {
+    root: {
+      screen: AppNavigator,
+    },
+    addSpot: {
+      screen: Pages.AddSpot,
     },
   },
-});
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  }
+);
 
 class App extends React.Component {
   render() {
     return (
-      <AppNavigator
+      <RootNavigator
         navigation={addNavigationHelpers({
           dispatch: this.props.dispatch,
           state: this.props.nav,

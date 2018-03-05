@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
-import createStore from 'waves/src/modules/store';
+import createStore from './modules/store';
 import RootNavigation from './RootNavigation';
 
 const store = createStore();

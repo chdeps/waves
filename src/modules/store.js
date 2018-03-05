@@ -1,7 +1,7 @@
 // @flow
 
 import { createStore } from 'redux';
-import enhancer from 'waves/src/modules/rootEnhancer';
-import reducers from 'waves/src/modules/rootReducer';
+import enhancer from './rootEnhancer';
+import reducers from './rootReducer';
 
 export default () => createStore(reducers, enhancer);

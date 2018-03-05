@@ -6,7 +6,7 @@ const initialState = {};
 export const actionTypes = {};
 
 // REDUCER
-export function appReducer(state = initialState, action) {
+export function authReducer(state = initialState, action) {
   switch (action.type) {
     default:
       return state;

@@ -1,17 +1,17 @@
 // @flow
 
-import { AppNavigator } from 'waves/src/RootNavigation';
+import { RootNavigator } from 'waves/src/RootNavigation';
 import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
 
-const initialNavState = AppNavigator.router.getStateForAction(
-  AppNavigator.router.getActionForPathAndParams('welcome')
+const initialNavState = RootNavigator.router.getStateForAction(
+  RootNavigator.router.getActionForPathAndParams('root')
 );
 
 export const navReducer = (state = initialNavState, action) => {
-  const nextState = AppNavigator.router.getStateForAction(action, state);
+  const nextState = RootNavigator.router.getStateForAction(action, state);
 
   // Simply return the original `state` if `nextState` is null or undefined.
   return nextState || state;

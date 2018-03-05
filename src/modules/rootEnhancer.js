@@ -1,8 +1,9 @@
 // @flow
 
-import { applyMiddleware } from 'redux';
+import { applyMiddleware, compose } from 'redux';
 import { navMiddleware } from './Nav';
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const rootEnhancer = applyMiddleware(navMiddleware);
+const rootEnhancer = composeEnhancers(applyMiddleware(navMiddleware));
 
 export default rootEnhancer;
