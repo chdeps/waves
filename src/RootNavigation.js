@@ -25,7 +25,7 @@ export const AppNavigator = StackNavigator(
     home: {
       screen: Pages.Home,
       navigationOptions: {
-        title: 'Your spots',
+        title: 'Wind & Waves',
       },
     },
   },

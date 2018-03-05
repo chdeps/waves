@@ -2,7 +2,17 @@
 
 import React, { PureComponent } from 'react';
 import firebase from 'react-native-firebase';
-import { StyleSheet, TouchableOpacity, Text, FlatList, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  ScrollView,
+  Image,
+  View,
+} from 'react-native';
+import BulletWave from '../../../assets/images/bulletWave.png';
+import Bin from '../../../assets/images/bin.png';
 import { Page } from '../../components';
 import theme from '../../theme';
 
@@ -47,13 +57,20 @@ export default class Home extends PureComponent<PropsType> {
 
   _renderItem = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => {}} style={this.styles.itemContainer}>
+      <View style={this.styles.itemContainer}>
+        <Image source={BulletWave} style={this.styles.bullet} />
         <Text style={this.styles.itemText} numberOfLines={2}>
           {item.name}
         </Text>
-      </TouchableOpacity>
+        <Text style={this.styles.itemSubText}>{item.style}</Text>
+        <TouchableOpacity style={this.styles.binContainer}>
+          <Image source={Bin} style={this.styles.bin} />
+        </TouchableOpacity>
+      </View>
     );
   };
+
+  _separator = () => <View style={this.styles.separator} />;
 
   render() {
     const styles = this.styles;
@@ -65,10 +82,12 @@ export default class Home extends PureComponent<PropsType> {
             data={this.state.spots}
             renderItem={this._renderItem}
             keyExtractor={item => item.id}
+            ItemSeparatorComponent={this._separator}
+            ListFooterComponent={this.state.spots.length && this._separator}
           />
         </ScrollView>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.back}
           onPress={() => this.props.navigation.navigate('addSpot')}
         >
           <Text style={styles.buttonText}>Add</Text>
@@ -91,17 +110,47 @@ const getStyles = () =>
       justifyContent: 'space-between',
       padding: 20,
     },
+    bullet: {
+      height: 40,
+      width: 40,
+    },
+    bin: {
+      height: 20,
+      width: 20,
+    },
+    binContainer: {
+      padding: 5,
+      backgroundColor: 'orange',
+    },
     itemText: {
       flex: 1,
       marginLeft: 16,
       marginRight: 24,
     },
-    button: {
+    itemSubText: {
+      marginLeft: 8,
+      marginRight: 24,
+      fontStyle: 'italic',
+    },
+    back: {
       backgroundColor: theme.colors.oceanBlue,
       width: '100%',
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: 10,
+      padding: 20,
+    },
+    buttonText: {
+      fontSize: 17,
+    },
+    separator: {
+      borderBottomColor: theme.colors.darkGray,
+      borderBottomWidth: 2,
+    },
+    header: {
+      fontSize: 17,
+      fontWeight: 'bold',
+      marginBottom: 20,
+      textAlign: 'center',
     },
   });

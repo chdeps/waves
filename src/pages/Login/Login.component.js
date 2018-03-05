@@ -21,14 +21,14 @@ export default class Login extends PureComponent<PropsType> {
     return (
       <Page>
         <KeyboardAvoidingView style={styles.container} behavior="position">
-          <Text style={styles.title} testID="title">
+          <Text style={styles.header} testID="title">
             Wind & Waves
           </Text>
           <Image source={Wave} style={styles.image} />
           <View style={styles.innerContainer}>
             <TextInput placeholder="Username" style={styles.input} />
             <TextInput placeholder="Password" secureTextEntry style={styles.input} />
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.back}>
               <Text>Login</Text>
             </TouchableOpacity>
           </View>
@@ -54,7 +54,7 @@ const getStyles = () =>
       justifyContent: 'center',
       alignItems: 'center',
     },
-    title: {
+    header: {
       ...theme.fonts.header,
       color: theme.colors.oceanBlue,
       textAlign: 'center',
@@ -66,7 +66,7 @@ const getStyles = () =>
       backgroundColor: 'white',
       width: 150,
     },
-    button: {
+    back: {
       backgroundColor: theme.colors.oceanBlue,
       height: 20,
       padding: 15,

@@ -13,12 +13,12 @@ export default class Welcome extends PureComponent<PropsType> {
     return (
       <Page>
         <View style={styles.container} behavior="position">
-          <Text style={styles.title} testID="title">
+          <Text style={styles.header} testID="title">
             Wind & Waves
           </Text>
           <Image source={Wave} style={styles.image} />
           <TouchableOpacity
-            style={styles.button}
+            style={styles.back}
             onPress={() => this.props.navigation.navigate('login')}
           >
             <Text>Get started</Text>
@@ -40,13 +40,13 @@ const getStyles = () =>
       justifyContent: 'space-around',
       alignItems: 'center',
     },
-    title: {
+    header: {
       ...theme.fonts.header,
       color: theme.colors.oceanBlue,
       textAlign: 'center',
       margin: theme.grid.x4,
     },
-    button: {
+    back: {
       backgroundColor: theme.colors.oceanBlue,
       height: 20,
       padding: 15,
