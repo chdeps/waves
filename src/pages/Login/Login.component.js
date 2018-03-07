@@ -40,26 +40,28 @@ export default class Login extends PureComponent<PropsType> {
     const styles = this.styles;
     return (
       <Page>
-        <KeyboardAvoidingView style={styles.container} behavior="position">
-          <Text style={styles.header} testID="title">
+        <KeyboardAvoidingView style={styles.container} behavior="position" testID="login">
+          <Text style={styles.header} testID="loginTitle">
             Wind & Waves
           </Text>
-          <Image source={Wave} style={styles.image} />
+          <Image source={Wave} style={styles.image} testID="loginImage" />
           <View style={styles.innerContainer}>
             <TextInput
-              placeholder="Username"
+              placeholder="username"
               style={styles.input}
               value={this.state.username}
               onChangeText={username => this.setState({ username })}
+              testID="loginUsername"
             />
             <TextInput
-              placeholder="Password"
+              placeholder="password"
               secureTextEntry
               style={styles.input}
               value={this.state.password}
               onChangeText={password => this.setState({ password })}
+              testID="loginPassword"
             />
-            <TouchableOpacity style={styles.back} onPress={this._login}>
+            <TouchableOpacity style={styles.back} onPress={this._login} testID="loginButton">
               <Text>Login</Text>
             </TouchableOpacity>
           </View>

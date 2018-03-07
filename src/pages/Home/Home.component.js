@@ -90,6 +90,7 @@ export default class Home extends PureComponent<PropsType> {
           />
         </ScrollView>
         <TouchableOpacity
+          testID="addSpotButton"
           style={styles.back}
           onPress={() => this.props.navigation.navigate('addSpot', { spots: this.spots })}
         >

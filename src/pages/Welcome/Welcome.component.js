@@ -13,13 +13,14 @@ export default class Welcome extends PureComponent<PropsType> {
     return (
       <Page>
         <View style={styles.container} behavior="position">
-          <Text style={styles.header} testID="title">
+          <Text style={styles.header} testID="welcomeTitle">
             Wind & Waves
           </Text>
-          <Image source={Wave} style={styles.image} />
+          <Image source={Wave} style={styles.image} testID="welcomeImage" />
           <TouchableOpacity
             style={styles.back}
             onPress={() => this.props.navigation.navigate('login')}
+            testID="welcomeButton"
           >
             <Text>Get started</Text>
           </TouchableOpacity>

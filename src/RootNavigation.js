@@ -30,6 +30,7 @@ export const AppNavigator = StackNavigator(
         title: 'Wind & Waves',
         headerLeft: (
           <TouchableOpacity
+            testID="logoutButton"
             onPress={() => {
               firebase
                 .auth()
@@ -43,8 +44,9 @@ export const AppNavigator = StackNavigator(
                   )
                 );
             }}
+            style={{ padding: 5, backgroundColor: 'red' }}
           >
-            <Image source={Door} style={{ marginLeft: 10, height: 30, width: 30 }} />
+            <Image source={Door} style={{ marginLeft: 10, height: 20, width: 20 }} />
           </TouchableOpacity>
         ),
       }),
