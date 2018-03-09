@@ -30,14 +30,12 @@ export default class AddSpot extends PureComponent<PropsType> {
           <Text style={this.styles.title}>NEW SPOT</Text>
           <View>
             <TextInput
-              testID="addSpotName"
               placeholder="Name"
               style={styles.input}
               value={this.state.name}
               onChangeText={name => this.setState({ name })}
             />
             <TextInput
-              testID="addSpotStyle"
               placeholder="Style"
               style={styles.input}
               value={this.state.style}
@@ -45,7 +43,6 @@ export default class AddSpot extends PureComponent<PropsType> {
             />
           </View>
           <TouchableOpacity
-            testID="addSpotConfirm"
             onPress={() => {
               const { name, style } = this.state;
               if (name && style) {
