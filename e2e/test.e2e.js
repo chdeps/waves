@@ -1,20 +1,20 @@
 /* eslint-env detox/detox */
+import { checkLogin, checkWelcome } from './services';
 
 describe('Login', () => {
-  it('should test logout', async () => {
-    await expect(element(by.id('welcomeTitle'))).toExist();
-    await expect(element(by.id('welcomeImage'))).toExist();
-    await element(by.id('welcomeButton')).tap();
+  it.skip('should test logout', async () => {
+    await checkWelcome();
+    await checkLogin();
+  });
 
-    await expect(element(by.id('loginTitle'))).toExist();
-    await expect(element(by.id('loginImage'))).toExist();
-    await element(by.id('loginUsername')).replaceText('wind@waves.com');
-    await element(by.id('loginPassword')).typeText('wind&waves');
-    await element(by.id('loginButton')).tap();
-
-    await expect(element(by.id('addSpotButton'))).toExist();
-    await element(by.id('logoutButton')).tap();
-
-    await expect(element(by.id('welcomeTitle'))).toExist();
+  it('should add a spot to the list', async () => {
+    await checkWelcome();
+    await checkLogin();
+    await element(by.id('addSpotButton')).tap();
+    await element(by.id('addSpotName')).tap();
+    await element(by.id('addSpotName')).typeText('LaSeine');
+    await element(by.id('addSpotStyle')).typeText('Bronzette');
+    await element(by.id('addSpotConfirm')).tap();
+    await expect(element(by.label('LaSeine'))).toExist();
   });
 });
