@@ -1,0 +1,95 @@
+---
+format_version: '4'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: react-native
+trigger_map:
+- push_branch: "*"
+  workflow: E2E
+- pull_request_source_branch: "*"
+  workflow: E2E
+workflows:
+  E2E:
+    steps:
+    - activate-ssh-key@3.1.1:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4.0.5: {}
+    - script@1.1.5:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            npm cache verify
+            npm install
+        title: Install
+    - npm@0.9.0:
+        title: Install Detox CLI
+        inputs:
+        - command: install -g detox-cli
+    - npm@0.9.0:
+        title: Install React-Native CLI
+        inputs:
+        - command: install -g react-native-cli
+    - script@1.1.5:
+        title: Install Detox Utils
+        inputs:
+        - content: |-
+            #!/bin/bash
+            brew tap facebook/fb
+            export CODE_SIGNING_REQUIRED=NO
+
+            brew install fbsimctl
+            brew tap wix/brew
+            brew install applesimutils --HEAD
+    - script@1.1.5:
+        title: Detox - Build Debug App
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            detox build -c ios.sim.debug
+    - script@1.1.5:
+        title: Detox - Run E2E Tests
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            detox test -c ios.sim.debug --cleanup
+    - deploy-to-bitrise-io@1.3.10: {}
+  DEPLOY:
+    steps:
+    - activate-ssh-key@3.1.1:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4.0.5: {}
+    - script@1.1.5:
+        title: Do anything with Script step
+    - npm@0.9.0:
+        inputs:
+        - command: install
+    - install-missing-android-tools@2.0.6: {}
+    - gradle-runner@1.8.0:
+        inputs:
+        - gradle_file: "$GRADLE_BUILD_FILE_PATH"
+        - gradle_task: assembleRelease
+        - gradlew_path: "$GRADLEW_PATH"
+    - certificate-and-profile-installer@1.9.2: {}
+    - xcode-archive@2.4.3:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - export_method: "$BITRISE_EXPORT_METHOD"
+        - configuration: Release
+    - deploy-to-bitrise-io@1.3.10: {}
+app:
+  envs:
+  - opts:
+      is_expand: false
+    GRADLE_BUILD_FILE_PATH: android/build.gradle
+  - opts:
+      is_expand: false
+    GRADLEW_PATH: android/gradlew
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: ios/waves.xcodeproj
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: waves
+  - opts:
+      is_expand: false
+    BITRISE_EXPORT_METHOD: development
