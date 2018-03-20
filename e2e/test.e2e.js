@@ -13,6 +13,7 @@ describe('Login', () => {
     await element(by.id('addSpotButton')).tap();
     await element(by.id('addSpotName')).tap();
     await element(by.id('addSpotName')).typeText('LaSeine');
+    await element(by.id('addSpotStyle')).tap();
     await element(by.id('addSpotStyle')).typeText('Bronzette');
     await element(by.id('addSpotConfirm')).tap();
     await expect(element(by.label('LaSeine'))).toExist();

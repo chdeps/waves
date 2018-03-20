@@ -80,15 +80,13 @@ export default class Home extends PureComponent<PropsType> {
     console.log(this.state.spots);
     return (
       <Page noMargin>
-        <ScrollView>
-          <FlatList
-            data={this.state.spots}
-            renderItem={this._renderItem}
-            keyExtractor={item => item.id}
-            ItemSeparatorComponent={this._separator}
-            ListFooterComponent={this.state.spots.length && this._separator}
-          />
-        </ScrollView>
+        <FlatList
+          data={this.state.spots}
+          renderItem={this._renderItem}
+          keyExtractor={item => item.id}
+          ItemSeparatorComponent={this._separator}
+          ListFooterComponent={this.state.spots.length && this._separator}
+        />
         <TouchableOpacity
           testID="addSpotButton"
           style={styles.back}
