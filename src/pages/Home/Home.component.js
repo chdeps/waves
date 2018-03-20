@@ -57,13 +57,14 @@ export default class Home extends PureComponent<PropsType> {
 
   _renderItem = ({ item }) => {
     return (
-      <View style={this.styles.itemContainer}>
+      <View style={this.styles.itemContainer} testID="spotContainer">
         <Image source={BulletWave} style={this.styles.bullet} />
         <Text style={this.styles.itemText} numberOfLines={2}>
           {item.name}
         </Text>
         <Text style={this.styles.itemSubText}>{item.style}</Text>
         <TouchableOpacity
+          testID="spotBin"
           style={this.styles.binContainer}
           onPress={() => this.spots.doc(item.id).delete()}
         >
