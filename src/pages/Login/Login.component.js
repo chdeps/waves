@@ -26,7 +26,7 @@ export default class Login extends PureComponent<PropsType> {
     const { username, password } = this.state;
     firebase
       .auth()
-      .signInAndRetrieveDataWithEmailAndPassword(username, password)
+      .signInAndRetrieveDataWithEmailAndPassword(username.trim(), password)
       .then(() =>
         this.props.navigation.dispatch(
           NavigationActions.reset({
@@ -34,7 +34,8 @@ export default class Login extends PureComponent<PropsType> {
             actions: [NavigationActions.navigate({ routeName: 'home' })],
           })
         )
-      );
+      )
+      .catch(e => console.log(e));
   };
   render() {
     const styles = this.styles;
