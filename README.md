@@ -19,3 +19,14 @@ Make sure you have installed:
     ruby
         bundler (sudo gem install bundler)
 
+
+## Installation
+
+```bash
+git clone git@github.com:chdeps/waves.git
+cd waves
+bundle install
+yarn
+bundle exec pod repo update
+cd ios && bundle exec pod install && cd ..
+```
