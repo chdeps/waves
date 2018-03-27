@@ -11,6 +11,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import { Page } from '../../components';
 import theme from '../../theme';
@@ -41,7 +42,11 @@ export default class Login extends PureComponent<PropsType> {
     const styles = this.styles;
     return (
       <Page>
-        <KeyboardAvoidingView style={styles.container} behavior="position" testID="login">
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior={Platform.select({ ios: 'position' })}
+          testID="login"
+        >
           <Text style={styles.header} testID="loginTitle">
             Wind & Waves
           </Text>
@@ -62,7 +67,7 @@ export default class Login extends PureComponent<PropsType> {
               onChangeText={password => this.setState({ password })}
               testID="loginPassword"
             />
-            <TouchableOpacity style={styles.back} onPress={this._login} testID="loginButton">
+            <TouchableOpacity style={styles.login} onPress={this._login} testID="loginButton">
               <Text>Login</Text>
             </TouchableOpacity>
           </View>
@@ -84,7 +89,6 @@ const getStyles = () =>
       alignItems: 'center',
     },
     innerContainer: {
-      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -100,12 +104,13 @@ const getStyles = () =>
       backgroundColor: 'white',
       width: 150,
     },
-    back: {
+    login: {
       backgroundColor: theme.colors.oceanBlue,
       height: 20,
       padding: 15,
       justifyContent: 'center',
       margin: 20,
+      marginBottom: 50,
     },
     image: {
       height: 200,
